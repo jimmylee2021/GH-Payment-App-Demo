@@ -50,10 +50,16 @@ export const Navbar: React.FC<NavbarProps> = ({
     return () => window.removeEventListener('gh_pay_change', handleSync);
   }, []);
 
+  const [confirmingReset, setConfirmingReset] = useState(false);
+
   const handleResetData = () => {
-    if (confirm('Reset hospital demo database to default patients and bills?')) {
-      resetToDemoData();
+    if (!confirmingReset) {
+      setConfirmingReset(true);
+      setTimeout(() => setConfirmingReset(false), 4000);
+      return;
     }
+    resetToDemoData();
+    setConfirmingReset(false);
   };
 
   // Station definitions
@@ -156,10 +162,15 @@ export const Navbar: React.FC<NavbarProps> = ({
               {currentUser?.role === 'admin' && (
                 <button
                   onClick={handleResetData}
-                  title="Reset sample hospital database"
-                  className="p-1.5 sm:p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors"
+                  title={confirmingReset ? 'Click again to confirm database reset' : 'Reset sample hospital database'}
+                  className={`p-1.5 sm:p-2 rounded-lg transition-colors flex items-center gap-1 text-xs ${
+                    confirmingReset 
+                      ? 'bg-rose-600/90 text-white font-bold px-2' 
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  }`}
                 >
                   <RotateCcw className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  {confirmingReset && <span className="text-[10px]">Confirm?</span>}
                 </button>
               )}
             </div>

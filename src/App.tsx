@@ -23,7 +23,17 @@ import { AuthUser } from './types';
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState<AuthUser | null>(getStoredUser());
-  const [station, setStation] = useState<ActiveStation>('dashboard');
+  const [station, setStation] = useState<ActiveStation>(() => {
+    const user = getStoredUser();
+    if (!user) return 'dashboard';
+    const path = typeof window !== 'undefined' ? window.location.pathname : '';
+    if (path.startsWith('/records') && canAccessStation(user.role, 'records')) return 'records';
+    if (path.startsWith('/doctor') && canAccessStation(user.role, 'doctor')) return 'doctor';
+    if (path.startsWith('/revenue') && canAccessStation(user.role, 'revenue')) return 'revenue';
+    if (path.startsWith('/verify') && canAccessStation(user.role, 'verify')) return 'verify';
+    if (path.startsWith('/patient') && canAccessStation(user.role, 'patient_portal')) return 'patient_portal';
+    return (getDefaultStationForRole(user.role) as ActiveStation) || 'dashboard';
+  });
   const [selectedCardNo, setSelectedCardNo] = useState<string>('12489');
   const [isPublicPayMode, setIsPublicPayMode] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
@@ -208,6 +218,25 @@ export default function App() {
             initialCardNo={selectedCardNo}
             onNavigateHome={() => handleNavigate(getDefaultStationForRole(currentUser.role) as ActiveStation)}
           />
+        )}
+
+        {/* Fallback for unauthorized station navigation */}
+        {!canAccessStation(currentUser.role, station) && station !== 'patient_portal' && station !== 'pay' && (
+          <div className="max-w-xl mx-auto my-12 p-8 bg-white rounded-2xl border border-slate-200 shadow-sm text-center space-y-4">
+            <div className="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mx-auto text-xl font-bold">
+              🔒
+            </div>
+            <h2 className="text-lg font-bold text-slate-800">Station Access Restricted</h2>
+            <p className="text-xs text-slate-500">
+              Your role ({currentUser.role}) does not have permission to access the "{station}" station.
+            </p>
+            <button
+              onClick={() => handleNavigate(getDefaultStationForRole(currentUser.role) as ActiveStation)}
+              className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition-colors"
+            >
+              Go to My Station ({currentUser.stationTitle})
+            </button>
+          </div>
         )}
       </main>
 
