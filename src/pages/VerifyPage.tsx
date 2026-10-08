@@ -220,12 +220,12 @@ export const VerifyPage: React.FC<VerifyPageProps> = ({
             <span>Clearance Station View:</span>
           </div>
 
-          <div className="flex bg-slate-100 p-1 rounded-xl text-xs font-bold w-full sm:w-auto">
+          <div className="grid grid-cols-2 sm:flex bg-slate-100 p-1 rounded-xl text-xs font-bold w-full sm:w-auto gap-1">
             {(['All', 'Pharmacy', 'Lab', 'Radiology'] as const).map((d) => (
               <button
                 key={d}
                 onClick={() => setDeptFilter(d)}
-                className={`flex-1 sm:flex-initial px-3.5 py-1.5 rounded-lg transition-all ${
+                className={`px-3 py-1.5 rounded-lg transition-all text-center ${
                   deptFilter === d
                     ? 'bg-white text-slate-900 shadow-xs'
                     : 'text-slate-600 hover:text-slate-900'

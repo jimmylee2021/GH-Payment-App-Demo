@@ -71,31 +71,46 @@ export const OfflineSyncBadge: React.FC<OfflineSyncBadgeProps> = ({ compact = fa
       >
         {isSyncing ? (
           <>
-            <RefreshCw className="w-3.5 h-3.5 animate-spin text-blue-400" />
-            <span>Syncing Supabase...</span>
+            <RefreshCw className="w-3.5 h-3.5 animate-spin text-blue-400 shrink-0" />
+            <span className="hidden xs:inline sm:inline">Syncing Supabase...</span>
+            <span className="inline xs:hidden sm:hidden">Syncing</span>
           </>
         ) : !isOnline ? (
           <>
-            <WifiOff className="w-3.5 h-3.5 text-amber-400" />
+            <WifiOff className="w-3.5 h-3.5 text-amber-400 shrink-0" />
             <span>
               {compact 
                 ? `Offline (${pendingCount})` 
-                : `Offline Mode (${pendingCount} cached)`}
+                : (
+                  <>
+                    <span className="hidden sm:inline">Offline Mode ({pendingCount} cached)</span>
+                    <span className="inline sm:hidden">Offline ({pendingCount})</span>
+                  </>
+                )}
             </span>
           </>
         ) : pendingCount > 0 ? (
           <>
-            <CloudUpload className="w-3.5 h-3.5 text-amber-400" />
-            <span>{pendingCount} Pending Sync</span>
+            <CloudUpload className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+            <span>{pendingCount} Pending</span>
           </>
         ) : (
           <>
-            <span className="relative flex h-2 w-2">
+            <span className="relative flex h-2 w-2 shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
             </span>
-            <Wifi className="w-3.5 h-3.5 text-emerald-400" />
-            <span>{compact ? 'Online' : 'Supabase Live'}</span>
+            <Wifi className="w-3.5 h-3.5 text-emerald-400 shrink-0 hidden xs:inline" />
+            <span>
+              {compact ? (
+                'Online'
+              ) : (
+                <>
+                  <span className="hidden sm:inline">Supabase Live</span>
+                  <span className="inline sm:hidden">Online</span>
+                </>
+              )}
+            </span>
           </>
         )}
       </button>

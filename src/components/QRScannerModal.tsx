@@ -198,7 +198,7 @@ export const QRScannerModal: React.FC<QRScannerModalProps> = ({
                 <AlertCircle className="w-10 h-10 text-amber-400 mb-2" />
                 <p className="text-sm font-semibold text-white mb-1">Camera Feed Unavailable</p>
                 <p className="text-xs text-slate-400 max-w-xs mb-3">{cameraError}</p>
-                <div className="flex gap-2">
+                <div className="flex flex-wrap justify-center gap-2">
                   <button
                     onClick={startScanner}
                     className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs font-medium text-white rounded-lg transition-colors"

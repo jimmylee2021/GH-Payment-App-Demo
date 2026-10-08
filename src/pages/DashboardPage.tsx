@@ -80,7 +80,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
           </p>
 
           {/* Quick Search */}
-          <form onSubmit={handleSearchSubmit} className="pt-2 flex max-w-md gap-2">
+          <form onSubmit={handleSearchSubmit} className="pt-2 flex flex-col sm:flex-row max-w-md gap-2">
             <div className="relative flex-1">
               <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
               <input
@@ -93,7 +93,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
             </div>
             <button
               type="submit"
-              className="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold text-xs transition-colors shrink-0 shadow-md"
+              className="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold text-xs transition-colors shrink-0 shadow-md text-center"
             >
               Open Card
             </button>
@@ -188,7 +188,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
           <span className="text-xs text-slate-500 font-medium">Click to access station</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           {/* Station 1: Records */}
           <div
             onClick={() => onNavigate('records')}
@@ -335,22 +335,22 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
               <div
                 key={b.id}
                 onClick={() => onNavigate('revenue', b.card_no)}
-                className="py-3 flex items-center justify-between hover:bg-slate-50 px-2 rounded-xl transition-colors cursor-pointer"
+                className="py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4 hover:bg-slate-50 px-2 rounded-xl transition-colors cursor-pointer"
               >
-                <div>
-                  <div className="font-bold text-sm text-slate-900 flex items-center gap-2">
-                    <span>{b.item_name}</span>
-                    <span className="font-mono-code text-[11px] font-bold bg-slate-100 text-slate-700 px-2 py-0.5 rounded">
+                <div className="min-w-0">
+                  <div className="font-bold text-sm text-slate-900 flex items-center gap-2 flex-wrap">
+                    <span className="truncate">{b.item_name}</span>
+                    <span className="font-mono-code text-[11px] font-bold bg-slate-100 text-slate-700 px-2 py-0.5 rounded shrink-0">
                       #{b.card_no}
                     </span>
                   </div>
-                  <div className="text-xs text-slate-500 mt-0.5">
+                  <div className="text-xs text-slate-500 mt-0.5 truncate">
                     {b.department} · {new Date(b.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     {b.receipt_no && ` · ${b.receipt_no}`}
                   </div>
                 </div>
 
-                <div className="text-right">
+                <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center shrink-0 pt-1 sm:pt-0">
                   <div className="font-mono-code font-bold text-sm text-slate-900">
                     ₦{b.amount.toLocaleString()}
                   </div>

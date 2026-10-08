@@ -284,19 +284,21 @@ export const PatientPortalPage: React.FC<PatientPortalPageProps> = ({ cardNo }) 
             ) : (
               <div className="divide-y divide-slate-100">
                 {pendingBills.map(b => (
-                  <div key={b.id} className="py-3 flex items-center justify-between">
-                    <div>
-                      <div className="font-bold text-sm text-slate-900">{b.item_name}</div>
-                      <div className="text-xs text-slate-500">
-                        [{b.department}] · {new Date(b.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  <div key={b.id} className="py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4">
+                    <div className="min-w-0">
+                      <div className="font-bold text-sm text-slate-900 truncate">{b.item_name}</div>
+                      <div className="text-xs text-slate-500 flex items-center gap-1.5 flex-wrap">
+                        <span>[{b.department}]</span>
+                        <span>·</span>
+                        <span>{new Date(b.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                         {b.hmo_share > 0 && (
-                          <span className="text-blue-600 ml-1.5 font-semibold">
+                          <span className="text-blue-600 font-semibold">
                             (NHIA covers ₦{b.hmo_share.toLocaleString()})
                           </span>
                         )}
                       </div>
                     </div>
-                    <div className="text-right">
+                    <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center shrink-0 pt-0.5 sm:pt-0">
                       <div className="font-mono-code font-bold text-sm text-slate-900">
                         ₦{(b.patient_share !== undefined ? b.patient_share : b.amount).toLocaleString()}
                       </div>
@@ -327,14 +329,18 @@ export const PatientPortalPage: React.FC<PatientPortalPageProps> = ({ cardNo }) 
             ) : (
               <div className="divide-y divide-slate-100 max-h-72 overflow-y-auto">
                 {paidBills.map(b => (
-                  <div key={b.id} className="py-3 flex items-center justify-between">
-                    <div>
-                      <div className="font-bold text-sm text-slate-900">{b.item_name}</div>
-                      <div className="text-xs text-slate-500">
-                        [{b.department}] · {b.receipt_no || 'OFFICIAL RECEIPT'} · {b.payment_method || 'Verified'}
+                  <div key={b.id} className="py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4">
+                    <div className="min-w-0">
+                      <div className="font-bold text-sm text-slate-900 truncate">{b.item_name}</div>
+                      <div className="text-xs text-slate-500 flex items-center gap-1.5 flex-wrap">
+                        <span>[{b.department}]</span>
+                        <span>·</span>
+                        <span>{b.receipt_no || 'OFFICIAL RECEIPT'}</span>
+                        <span>·</span>
+                        <span>{b.payment_method || 'Verified'}</span>
                       </div>
                     </div>
-                    <div className="text-right space-y-1">
+                    <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center shrink-0 pt-0.5 sm:pt-0 space-y-0 sm:space-y-1">
                       <div className="font-mono-code font-bold text-sm text-emerald-700">
                         ₦{(b.patient_share !== undefined ? b.patient_share : b.amount).toLocaleString()}
                       </div>

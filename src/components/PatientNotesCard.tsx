@@ -232,13 +232,13 @@ export const PatientNotesCard: React.FC<PatientNotesCardProps> = ({
           </div>
 
           {/* Action buttons */}
-          <div className="flex items-center justify-between pt-2">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 pt-2">
             <div>
               {notes ? (
                 <button
                   type="button"
                   onClick={handleClear}
-                  className="px-2.5 py-1.5 text-xs font-bold text-rose-600 hover:text-rose-800 hover:bg-rose-50 rounded-lg flex items-center gap-1 transition-colors"
+                  className="px-2.5 py-1.5 text-xs font-bold text-rose-600 hover:text-rose-800 hover:bg-rose-50 rounded-lg flex items-center justify-center sm:justify-start gap-1 transition-colors w-full sm:w-auto"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                   Clear Note
@@ -246,7 +246,7 @@ export const PatientNotesCard: React.FC<PatientNotesCardProps> = ({
               ) : null}
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center justify-end gap-2">
               {isEditing && (
                 <button
                   type="button"
@@ -254,7 +254,7 @@ export const PatientNotesCard: React.FC<PatientNotesCardProps> = ({
                     setMemoText(notes || '');
                     setIsEditing(false);
                   }}
-                  className="px-3 py-1.5 text-xs font-bold text-slate-600 hover:text-slate-900 rounded-lg"
+                  className="flex-1 sm:flex-initial px-3 py-2 text-xs font-bold text-slate-600 hover:text-slate-900 rounded-lg text-center"
                 >
                   Cancel
                 </button>
@@ -262,10 +262,10 @@ export const PatientNotesCard: React.FC<PatientNotesCardProps> = ({
               <button
                 type="button"
                 onClick={handleSave}
-                className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs flex items-center gap-1.5 shadow-sm transition-all active:scale-95"
+                className="flex-1 sm:flex-initial px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95"
               >
                 <Save className="w-3.5 h-3.5" />
-                Save Note to Card #{cardNo}
+                <span className="truncate">Save Note to Card #{cardNo}</span>
               </button>
             </div>
           </div>

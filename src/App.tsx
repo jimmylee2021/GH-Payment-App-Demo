@@ -166,7 +166,7 @@ export default function App() {
       />
 
       {/* Main Workstation View guarded by User Role */}
-      <main className="flex-1">
+      <main className="flex-1 pb-16 md:pb-6">
         {station === 'dashboard' && canAccessStation(currentUser.role, 'dashboard') && (
           <DashboardPage onNavigate={handleNavigate} />
         )}
