@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" fill="#059669"/>
+  <circle cx="256" cy="256" r="180" fill="#047857"/>
+  <text x="256" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="130" font-weight="900" fill="#ffffff" text-anchor="middle">GH</text>
+  <text x="256" y="340" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="700" fill="#a7f3d0" text-anchor="middle" letter-spacing="3">OFFLINE SYNC</text>
+  <circle cx="350" cy="165" r="22" fill="#34d399"/>
+</svg>

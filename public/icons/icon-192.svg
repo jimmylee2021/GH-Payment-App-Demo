@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <rect width="192" height="192" rx="36" fill="#059669"/>
+  <rect x="24" y="24" width="144" height="144" rx="24" fill="#047857"/>
+  <text x="96" y="112" font-family="system-ui, -apple-system, sans-serif" font-size="64" font-weight="900" fill="#ffffff" text-anchor="middle">GH</text>
+  <circle cx="140" cy="52" r="12" fill="#34d399"/>
+</svg>

@@ -1,0 +1,8 @@
+{
+  "name": "GH Pay - Hospital Seamless Payment System",
+  "description": "Hospital Seamless Payment System using existing patient cards. Post everywhere, pay once, verify everywhere.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
